@@ -1,21 +1,24 @@
+import 'package:e_commerce_test/main.dart';
+import 'package:e_commerce_test/utilities/constants/dimen_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Assuming ProductController is defined somewhere else in your code
 import 'package:get/get.dart';
 import 'product_controller.dart';
 
 class CustomProductItem extends StatelessWidget {
-  final dynamic product; // Replace 'dynamic' with your specific product type
+  final dynamic product;
 
-  const CustomProductItem({Key? key, required this.product}) : super(key: key);
+  const CustomProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -24,38 +27,37 @@ class CustomProductItem extends StatelessWidget {
               child: Image.network(
                 product.image,
                 fit: BoxFit.contain,
-                height: 200, // Adjust height as needed
-                width: double.infinity, // Make image take full width
+                height: 200,
+                width: double.infinity,
               ),
             ),
-            SizedBox(height: 16),
-            // Product title
+            SizedBox(height: DimenConstants.dimen16.h),
             Text(
               product.title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18), // Bold and larger font size
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: DimenConstants.dimen18.h),
             ),
-            SizedBox(height: 8),
-            // Highlighted price
+            SizedBox(height: DimenConstants.dimen8.h),
             Text(
               '\$${product.price?.toStringAsFixed(2)}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.red,
                 fontWeight: FontWeight.bold,
-                fontSize: 22, // Larger font size for price
+                fontSize: 22,
               ),
             ),
-            SizedBox(height: 16),
-            // Add to cart button
+            SizedBox(height: DimenConstants.dimen16.h),
             ElevatedButton.icon(
               onPressed: () {
-                // Add the product to the cart
                 ProductController controller = Get.find();
                 controller.addToCart(product);
               },
-              icon: Icon(Icons.add_shopping_cart),
-              label: Text('Add to Cart'),
+              icon: const Icon(Icons.add_shopping_cart),
+              label: const Text('Add to Cart'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 40), // Make the button take full width
+                minimumSize:
+                    const Size(double.infinity, DimenConstants.dimen40),
               ),
             ),
           ],

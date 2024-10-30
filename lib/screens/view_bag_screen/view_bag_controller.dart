@@ -19,8 +19,8 @@ class ViewBagController extends GetxController {
     if (cartItems[index].quantity > 1) {
       cartItems[index].quantity--;
     } else {
-      cartItems.removeAt(index); // Remove the item if quantity is 0
+      cartItems.removeAt(index);
     }
-    cartItems.refresh(); // Trigger UI update
+    cartItems.refresh();
   }
 }

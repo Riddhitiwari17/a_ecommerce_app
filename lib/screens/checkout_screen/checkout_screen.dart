@@ -1,47 +1,71 @@
+import 'package:e_commerce_test/utilities/routes/route_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../login_screen/;ogin_screen.dart';
+import '../../utilities/constants/color_constant.dart';
+import '../../utilities/constants/dimen_constant.dart';
+import '../../utilities/widgets/common_text_widget.dart';
+import '../login_screen/login_screen.dart';
 import '../login_screen/auth_controller.dart';
 
 class CheckoutScreen extends StatelessWidget {
-  final AuthController authController = Get.put(AuthController()); // Get instance of AuthController
+  final LoginController authController = Get.put(LoginController());
+
+  CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    authController.checkLoginStatus();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Checkout'),
+        title: const Text('Checkout'),
       ),
       body: Center(
         child: Obx(() {
           if (authController.isLoggedIn.value) {
-            // User is logged in, show payment methods
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Payment Methods"),
-                SizedBox(height: 20),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: CommonTextWidget(
+                    text: "Payment Methods",
+                    textColor: ColorConstants.blueTextColor,
+                  ),
+                ),
+                SizedBox(height: DimenConstants.dimen20.h),
                 ElevatedButton(
                   onPressed: () {
-                    // Handle payment
                     Get.snackbar("Payment", "Payment processed successfully!");
                   },
-                  child: Text('Pay Now'),
+                  child: const Text('Pay Now'),
                 ),
               ],
             );
           } else {
-            // User is not logged in, show login prompt
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("You need to log in to proceed."),
-                SizedBox(height: 20),
+                Container(
+                  decoration: BoxDecoration(
+                      color: ColorConstants.straightBtnColor.withOpacity(0.2),
+                      borderRadius:
+                          BorderRadius.circular(DimenConstants.dimen10.r)),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: CommonTextWidget(
+                      text: "You need to log in to proceed.",
+                      textColor: ColorConstants.blueTextColor,
+                    ),
+                  ),
+                ),
+                SizedBox(height: DimenConstants.dimen20.h),
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(LoginScreen()); // Navigate to LoginScreen
+                    Get.offNamed(RouteConstants.loginScreen);
                   },
-                  child: Text('Login'),
+                  child: const Text('Login'),
                 ),
               ],
             );

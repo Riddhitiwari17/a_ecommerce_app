@@ -12,10 +12,8 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    // Initializing ScreenUtil for responsive layouts
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             scaffoldBackgroundColor: ColorConstants.backgroundColor,
           ),
-          initialRoute: RouteConstants.productScreen,
+          initialRoute: RouteConstants.loginScreen,
           getPages: RouteScreens.routes,
         );
       },

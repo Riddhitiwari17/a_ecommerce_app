@@ -14,7 +14,7 @@ class Rating {
 
 class Product {
   final int id;
-  final String title; // Use 'title' instead of 'name' to match JSON
+  final String title;
   final double price;
   final String description;
   final String category;
